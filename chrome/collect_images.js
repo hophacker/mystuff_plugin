@@ -20,10 +20,9 @@ function getImages(doc) {
 
 var images = getImages(document);
 
-if(typeof(chrome)!='undefined' && chrome.extension) {
+if(typeof(chrome) !=='undefined' && chrome.extension) {
 	chrome.extension.sendRequest({type:'fancy.images', images:images});
 } else if(self.port && self.port.emit) {
 	self.port.emit('fancy.images', images);
 }
-
 })();
