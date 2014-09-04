@@ -1,6 +1,6 @@
-var tab_title, tab_url, info_imgs=[],bookmarklet_username;
-var ready = 0, doc_len = 0, token = '';
-var isChrome  = (typeof(chrome) != 'undefined');
+var tab_title, tab_url, bookmarklet_username;
+var ready = 0, doc_len = 0;// token = '';
+var isChrome  = (typeof(chrome) !== 'undefined');
 var isFF      = (self && self.port);
 var clicky_site_ids = [66502369];
 
