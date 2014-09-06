@@ -129,6 +129,7 @@ var Adder = (function(){
 			chrome.cookies.get(
 				{url:'localhost',name:'mystuff_token'},
 				function(cookie){
+                    console.log(JSON.stringify(cookie));
 					$.ajax({
                         url  : 'http://localhost:3000/images.json',
 						type : 'POST',
@@ -171,7 +172,7 @@ function doFancy( simgs )
 		} else { // add
 			$('#wrap_fail').hide();
 			$("#wrap_add,#fancyit").show();
-			$("#img-title").val(tab_title);
+			$("#image_title").val(tab_title);
 			$('#notiList > button.back').removeClass('noimgs');
 
 			if(simgs.length == 1) $('#navigator').hide();

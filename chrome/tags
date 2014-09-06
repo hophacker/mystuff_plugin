@@ -1,0 +1,37 @@
+
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+checkLogin	background.js	/^function checkLogin() {$/;"	f
+checkNotification	background.js	/^function checkNotification() {$/;"	f
+clicky_site_ids	popup.js	/^var clicky_site_ids = [66502369];$/;"	v
+doFancy	popup.js	/^function doFancy( simgs )$/;"	f
+entity.thing.thumb_img	background.js	/^				entity.thing = {$/;"	p
+entity.type	background.js	/^			entity = {type:n.type, user:{name:n.entities.user.username, img:n.entities.user.image_url}};$/;"	p
+entity.user2.name	background.js	/^				entity.user2 = {$/;"	p
+fancyInjectXHR	background.js	/^var fancyInjectXHR = null;$/;"	v
+getResizedURL	background.js	/^function getResizedURL(url, width, height){$/;"	f
+logged_in	background.js	/^var logged_in = false, installed = true, loginTabId = 0, isRetina = window.devicePixelRatio > 1;$/;"	v
+needClose	popup.js	/^var needClose = 0;$/;"	v
+noti_popups	background.js	/^var noti_popups = {}, noti_ids = [], noti_id = 0;$/;"	v
+onClickHandler	background.js	/^function onClickHandler(info, tab) {$/;"	f
+opt.message	background.js	/^			title : 'Fancy',$/;"	p
+opt.title	background.js	/^			type  : 'basic',$/;"	p
+opt.title	background.js	/^			type  : 'image',$/;"	p
+opt.type	background.js	/^		opt = {$/;"	p
+processNotification	background.js	/^function processNotification( noti ) {$/;"	f
+ready	popup.js	/^var ready = 0, doc_len = 0;\/\/ token = '';$/;"	v
+resizePanel	popup.js	/^function resizePanel()$/;"	f
+setNotiCount	popup.js	/^function setNotiCount() {$/;"	f
+showContentPage	popup.js	/^function showContentPage(speed, callback)$/;"	f
+showContentPage._callback	popup.js	/^	function _callback(){$/;"	f
+showLogin	background.js	/^function showLogin() {$/;"	f
+showNoticePage	popup.js	/^function showNoticePage(speed, callback)$/;"	f
+showNoticePage._callback	popup.js	/^	function _callback(){$/;"	f
+startCheckOpen	popup.js	/^function startCheckOpen () {$/;"	f
+tab_title	popup.js	/^var tab_title, tab_url, bookmarklet_username;$/;"	v
+wasOpen	popup.js	/^var wasOpen = 0;$/;"	v
+xhr.onreadystatechange	background.js	/^	var xhr = new XMLHttpRequest();$/;"	f
