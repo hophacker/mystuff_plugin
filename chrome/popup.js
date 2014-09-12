@@ -127,11 +127,11 @@ var Adder = (function(){
 			}
 
 			chrome.cookies.get(
-				{url:'localhost',name:'mystuff_token'},
+				{url:config_root, name:'mystuff_token'},
 				function(cookie){
                     console.log(JSON.stringify(cookie));
 					$.ajax({
-                        url  : 'http://localhost:3000/images.json',
+                        url  : config_image_url,
 						type : 'POST',
 						data : data,
 						dataType : 'json',

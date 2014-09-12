@@ -34,10 +34,10 @@ function selectionHandler(){
         };
 
         chrome.cookies.get(
-            {url:'localhost',name:'mystuff_token'},
+            {url: config_root, name:'mystuff_token'},
             function(cookie){
                 $.ajax({
-                    url  : 'http://localhost:3000/texts.json',
+                    url  : config_text_url,
                     type : 'POST',
                     data : data,
                     dataType : 'json',
@@ -50,6 +50,7 @@ function selectionHandler(){
                         console.log(data)
                         if( data.status_code == 0 ) {
                             alert("success!");
+                            alert(config.url)
                         } else {
                             alert("failed!");
                         }
