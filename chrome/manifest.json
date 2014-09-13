@@ -1,4 +1,7 @@
 {
+   "name": "hoppy",
+   "version": "0.1",
+   "manifest_version": 2,
    "background": {
       "scripts": [ "jquery.min.js", "config.js", "ajax.js", "background.js", "menu.js"]
    },
@@ -13,11 +16,7 @@
       "16": "mystuff_icon_16.png",
       "48": "mystuff_icon_48.png"
    },
-   "key": "FFIfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYJ1+R2usDU8qBuKizfBpeTbSaQHNBy73feVNrGOdjRVj/8Vp5PNQBQUUT5/vdE1mXiqAIJU7GbYrxwigRt8S4qSU6zy/JEKvXTxZgNf1uZvDpoZMXYY87lAJT9k/XMVz1eNDbL4BucqNKqmHB/Z6CzSV3tl0d7YRM2bOtESoYIwIDAQAB",
-   "manifest_version": 2,
-   "name": "Mystuff",
    "options_page": "options.html",
    "permissions": [ "tabs", "http://*/*", "https://*/*", "cookies", "notifications", "contextMenus" ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.3.30807.1"
+   "update_url": "https://clients2.google.com/service/update2/crx"
 }
