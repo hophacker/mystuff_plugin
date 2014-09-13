@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<style>
+::-webkit-scrollbar { display:none }
+body {
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	font-size:12px;
+	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#wrapper {
+	height:160px;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+}
+#caption {
+	position:absolute;
+	bottom:0;
+	padding:8px;
+	width:-webkit-calc(100% - 16px);
+	border-top:1px solid rgba(0,0,0,.2);
+	background-color:rgba(255,255,255,.7);
+}
+#user {
+	float:left;
+	border-radius:3px;
+	width:32px;
+	height:32px;
+}
+#text {
+	margin-left:40px;
+}
+</style>
+<script src="jquery.min.js"></script>
+<script src="notification.js"></script>
+<body>
+<div id="wrapper">
+	<div id="caption">
+		<img id="user" />
+		<div id="text"></div>
+	</div>
+</div>
+</body>
+</html>

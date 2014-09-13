@@ -1,4 +1,4 @@
-var logged_in = false, installed = true, loginTabId = 0, isRetina = window.devicePixelRatio > 1;
+var signed_in = false, installed = true, loginTabId = 0, isRetina = window.devicePixelRatio > 1;
 
 
 
@@ -12,7 +12,7 @@ function showLogin() {
     var optionsPage = 'chrome-extension://'+EXT_ID+'/options.html';
 
     chrome.tabs.create(
-        {url:'https://fancy.com/fancyit/login?next='+optionsPage},
+        {url: signin_path},//'https://fancy.com/fancyit/login?next='+optionsPage},
         function(tab){
             loginTabId = tab.id;
             chrome.tabs.connect().onDisconnect(function(){ loginTabId = 0; });
@@ -21,7 +21,7 @@ function showLogin() {
 }
 
 function checkLogin() {
-    var api = 'http://fancy.com/jsonfeed/check_login_status';
+    var api = root_path + '/api/check_signin.json';
     var interval = 60; // seconds
 
     var xhr = new XMLHttpRequest();
@@ -30,9 +30,10 @@ function checkLogin() {
         if(xhr.status != 200) return setTimeout(checkLogin, interval*2000); // something is wrong on fancy server. wait more.
 
         var data = JSON.parse(xhr.responseText);
-        if(!data || !data.response || !data.response.logged_in) return setTimeout(checkLogin, interval*2000); // something is wrong on fancy server. wait more.
-        if(data.response.logged_in){
-            logged_in = true;
+        console.log(data.response)
+        if(!data || !data.response || !data.response.signed_in) return setTimeout(checkLogin, interval*2000); // something is wrong on fancy server. wait more.
+        if(data.response.signed_in){
+            signed_in = true;
             return checkNotification();
         }
 
@@ -50,6 +51,9 @@ function checkLogin() {
 checkLogin();
 
 function checkNotification() {
+    //jie feng
+    signed_in = true
+    return true
     var api = 'http://fancy.com/jsonfeed/notifications';
     var interval = 60; // seconds
     var displayNoti = localStorage['fancyDisplayNoti'] || 'Y';
@@ -65,7 +69,8 @@ function checkNotification() {
         var timer = setTimeout(checkNotification, interval * 1000);
 
         if(xhr.status == 404) {
-            logged_in = false;
+            signed_in = false;
+            
             clearTimeout(timer);
             return setTimeout(checkLogin, 0);
         }
