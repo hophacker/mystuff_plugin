@@ -5,9 +5,9 @@
    "browser_action": {
       "default_icon": "mystuff_icon_19.png",
       "default_popup": "popup.html",
-      "default_title": "Fancy"
+      "default_title": "Hoppy"
    },
-   "description": "Fancy is part store, blog, magazine and wishlist. Fancy for Chrome gives you desktop notifications + easy access to your collection.",
+   "description": "hoppy is an app which helps collect, manage, share web elements liked by you",
    "icons": {
       "128": "mystuff_icon_128.png",
       "16": "mystuff_icon_16.png",

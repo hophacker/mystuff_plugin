@@ -1,3 +1,4 @@
+/*global $, jQuery, location*/
 jQuery(function($){
 
     var parts = location.search.substr(1).split('&');
