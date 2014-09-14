@@ -49,11 +49,9 @@ function selectionHandler(){
                     success : function(data,status,xhr) {
                         console.log(data)
                         if( data.status_code == 0 ) {
-                            //alert("success!");
                             var counter=0;
                             var fire=function() {
-                                if (counter<=11) {
-                                    
+                                if (counter<=5) {
                                     if (counter%2==0)
                                         chrome.browserAction.setIcon({path:"Folder-Generic-icon1.png"});
                                     else
@@ -64,8 +62,6 @@ function selectionHandler(){
                                 }
                             }
                             setInterval(fire,100);
-                            
-                            alert(config.url)
                         } else {
                             alert("failed!");
                         }
