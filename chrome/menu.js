@@ -34,10 +34,10 @@ function selectionHandler(){
         };
 
         chrome.cookies.get(
-            {url: config_root, name:'mystuff_token'},
+            {url: root_path, name:'mystuff_token'},
             function(cookie){
                 $.ajax({
-                    url  : config_text_url,
+                    url  : texts_path,
                     type : 'POST',
                     data : data,
                     dataType : 'json',

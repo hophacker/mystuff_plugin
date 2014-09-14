@@ -1,6 +1,6 @@
-var tab_title, tab_url, bookmarklet_username;
-var ready = 0, doc_len = 0;// token = '';
-var isChrome  = (typeof(chrome) !== 'undefined');
+var tab_title, tab_url, info_imgs=[],bookmarklet_username;
+var ready = 0, doc_len = 0, token = '';
+var isChrome  = (typeof(chrome) != 'undefined');
 var isFF      = (self && self.port);
 var clicky_site_ids = [66502369];
 
@@ -108,14 +108,14 @@ var Adder = (function(){
 		},
 		fancyit : function() {
 			var data = {
-				//'category'  : $("#category-for-thing").val(),
-				'image[title]'      : $("#image_title").val(),
-				'image[description]'      : $("#image_description").val(),
-				'image[image_url]' : $selected.attr('src'),
-				'image[source_url]'   : tab_url
-				//'user_key'  : bookmarklet_username,
-				//'via'       : 'chrome',
-				//'list_ids'  : $('#user-list').val()
+				'category'  : $("#category-for-thing").val(),
+				'name'      : $("#img-title").val(),
+				'note'      : $("#img-note").val(),
+				'photo_url' : $selected.attr('src'),
+				'tag_url'   : tab_url,
+				'user_key'  : bookmarklet_username,
+				'via'       : 'chrome',
+				'list_ids'  : $('#user-list').val()
 			};
 
 			if(!data.category){
@@ -127,11 +127,10 @@ var Adder = (function(){
 			}
 
 			chrome.cookies.get(
-				{url: root_path, name:'mystuff_token'},
+				{url:'http://fancy.com',name:'csrftoken'},
 				function(cookie){
-                    console.log(JSON.stringify(cookie));
 					$.ajax({
-                        url  : images_path,
+						url  : 'http://fancy.com/add_new_sys_thing.json',
 						type : 'POST',
 						data : data,
 						dataType : 'json',
@@ -141,9 +140,8 @@ var Adder = (function(){
 							}
 						},
 						success : function(data,status,xhr) {
-                            console.log(data)
 							if( data.status_code == 1 ) {
-								$("#gosee").data('image_url', data.image_url);
+								$("#gosee").data('thing_url', data.thing_url);
 								$("#wrap_add,#fancyit").hide();
 								$("#wrap_success").show();
 
@@ -172,7 +170,7 @@ function doFancy( simgs )
 		} else { // add
 			$('#wrap_fail').hide();
 			$("#wrap_add,#fancyit").show();
-			$("#image_title").val(tab_title);
+			$("#img-title").val(tab_title);
 			$('#notiList > button.back').removeClass('noimgs');
 
 			if(simgs.length == 1) $('#navigator').hide();
@@ -211,28 +209,23 @@ if(isChrome) {
 	});
 }
 
-function signup_now(){
-    chrome.tabs.create({url:signin_path ,selected:true}, function(){ window.close() });
-}
-$.ajax(api_path + '/notifications_count.json', { } )
+$.ajax('http://fancy.com/notifications_count.json', { } )
 	.success(function(data,status,xhr) { 
-		if(data && data.response && data.response.signed_in) {
+		if(data && data.response) {
 			bookmarklet_username = data.response.username;
-            if(isChrome) {
-                chrome.tabs.getSelected(null, function(tab){
-                    tab_url   = tab.url;
-                    tab_title = tab.title;
-                    chrome.tabs.executeScript(tab.id, {file:'collect_images.js'});
-                });
-            }
-		}else{
-            signup_now()
-        }
+		}
 		
+		if(isChrome) {
+			chrome.tabs.getSelected(null, function(tab){
+				tab_url   = tab.url;
+				tab_title = tab.title;
+				chrome.tabs.executeScript(tab.id, {file:'collect_images.js'});
+			});
+		}
 	})
 	.complete(function(xhr, status){
 		if(xhr.status == 404) {	// not signed in
-            signup_now()
+			chrome.tabs.create({url:'https://fancy.com/fancyit/login',selected:true}, function(){ window.close() });
 		}
 	});
 	
@@ -295,8 +288,8 @@ jQuery(function($){
 		Adder.fancyit();
 	});
 	$('#gosee').click(function(){
-		var url = $(this).data('image_url');
-		chrome.tabs.create({ url : url });
+		var url = $(this).data('thing_url');
+		chrome.tabs.create({ url : 'http://fancy.com'+url });
 		window.close();
 	});
 

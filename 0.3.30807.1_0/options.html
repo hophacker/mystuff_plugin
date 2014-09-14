@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body{
+	background-color:#edeff5;
+	font: normal 13px/16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:#373d48;
+}
+
+form {
+	width:500px;
+	margin:20px auto;
+	padding:20px 30px;
+	background-color:#fff;
+	box-shadow:0 1px 1px rgba(0,0,0,0.1);
+	border-radius:4px;
+}
+
+form > ul {
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+
+h1 {
+	text-align: center;
+	font: bold 18px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin:0;
+}
+
+#username {
+	font-weight: bold;
+	text-decoration: none;
+	font-size:15px;
+	color: #373d48;
+}
+#username:hover {
+	text-decoration: underline;
+	color: #588cc7;
+}
+
+.separator {
+	border-top:1px solid #eceef4;
+	margin:20px 0;
+}
+
+button {
+	width:100px;
+	padding: 4px 0 5px 0;
+	border:0;
+	border-radius: 4px;
+	font: bold 15px/22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	text-align: center;
+	color: #fff;
+	cursor:pointer;
+}
+#submit {
+	background-color: #588cc7;
+}
+#submit:hover {
+	background-color: #3e73b7;
+}
+#close {
+	background-color: #a7adb3;
+}
+#close:hover {
+	background-color: #727a83;
+}
+
+</style>
+<script src="jquery.min.js"></script>
+<script src="options.js"></script>
+</head>
+<body>
+<form>
+<h1>Settings for Fancy Chrome Extension</h1>
+<ul>
+	<li>
+		<div class="separator"></div>
+		<p>
+			You are signed in as <a id="username">...</a>.
+			When you see something you love on the web, Fancy it by clicking <img src="fancy_icon_16.png" style="vertical-align:middle" /> on your browser bar.
+		</p>
+	</li>
+	<li>
+		<p>Display desktop notifications?</p>
+		<label><input type="radio" value="Y" name="fancyDisplayNoti" />Yes</label>
+		<label><input type="radio" value="N" name="fancyDisplayNoti" />No</label>
+	</li>
+	<li>
+		<p>Enable enhanced search results?</p>
+		<label><input type="radio" value="Y" name="fancyEnhanceSearch" />Yes</label>
+		<label><input type="radio" value="N" name="fancyEnhanceSearch" />No</label>
+	</li>
+	<li id="buttons">
+		<div class="separator"></div>
+		<button id="submit">Save</button>
+		<button id="close">Close</button>
+	</li>
+</ul>
+</form>
+</body>
+</html>

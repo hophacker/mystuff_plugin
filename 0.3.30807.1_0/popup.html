@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="./reset.css" />
+	<link type="text/css" rel="stylesheet" href="./popup.css" />
+	<script src="jquery.min.js"></script>
+	<script src="popup.js"></script>
+</head>
+<body>
+<header>
+	<div class="logo"></div>
+</header>
+
+<div id="wrapper">
+	<div id="content">
+		<button type="button" class="notice view" style="display:none">You have <span class="count">0</span> new notification<span class="s">s</span><span class="view">View</span></button>
+
+		<section id="wrap_add">
+			<div id="selected"><img id="selected_image" /></div>
+
+			<div id="navigator">
+				<div id="left_nav" class="image_nav">
+					<div><button><span>&lt;</span></button></div>
+				</div>
+				<div id="image_list">
+					<ul></ul>
+				</div>
+				<div id="right_nav" class="image_nav">
+					<button><span>&gt;</span></button>
+				</div>
+			</div>
+			<div id="description">
+				<div id="desc_top">
+					<input id="img-title" type="text" placeholder="Add a title for this thing" />
+					<input id="img-note" type="text" placeholder="Add a short note (Optional)"/>
+				</div>
+				<div class="desc_down">
+					<select id="category-for-thing" size="1">
+						<option value="">Put in category...</option>
+						<option value="">------------------</option>
+						<option value="Mens">Men's</option>
+						<option value="Womens">Women's</option>
+						<option value="Kids">Kids</option>
+						<option value="Pets">Pets</option>
+						<option value="Home">Home</option>
+						<option value="Gadgets">Gadgets</option>
+						<option value="Art">Art</option>
+						<option value="Food">Food</option>
+						<option value="Media">Media</option>
+						<option value="Architecture">Architecture</option>
+						<option value="travel-and-destinations">Travel &amp; Destinations</option>
+						<option value="sports-and-outdoors">Sports &amp; Outdoors</option>
+						<option value="Workspace">Workspace</option>
+						<option value="cars-and-vehicles">Cars &amp; Vehicles</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
+				<div class="desc_down">
+					<select id="user-list" size="1">
+						<option value="">Add to List...</option>
+						<option value="">------------------</option>
+						<option value="">Loading...</option>
+					</select>
+				</div>
+			</div>
+		</section>
+
+		<section id="wrap_fail">
+			<div class="floating"><img src="./img/fail.png"/></div>
+			<div class="main_desc">
+				<div><b>Couldn't find any good images for this page.</b></div>
+				<div>The images might not be large enough, or they might be protected or inside a web plugin.</div>
+				<div>Try again on a different page.</div>
+			</div>
+		</section>
+
+		<section id="wrap_disable">
+			<div class="floating"><img src="./img/fail.png"/></div>
+			<div class="main_desc">
+				<div><b>Couldn't execute Fancy for this page.</b></div>
+				<div>Try again on a different page.</div>
+			</div>
+		</section>
+
+		<section id="wrap_success">
+			<div class="floating"><img src="./img/success.png"/></div>
+			<div class="main_desc">
+				<div><b>Image has been saved to your collection!</b></div>
+				<button id="gosee" type="button" class="fbutton gosee blue big">Go See it</button>
+			</div>
+		</section>
+
+		<section id="wrap_waiting">
+			<div class="main_desc">
+				<div>Please wait for the page to finish loading</div>
+			</div>
+		</section>
+
+		<footer>
+			<button id="close" type="button" class="fbutton close gray left">Close</button>
+			<button id="fancyit" type="button" class="fbutton fancy blue right">Fancy it</button>
+		</footer>
+	</div>
+	<div id="notiList" style="visibility:hidden">
+		<button type="button" class="notice back noimgs">Add something on this website to Fancy</button>
+		<hr />
+		<div class="list">
+			<ul></ul>
+			<div id="showmore">
+				<a href="http://www.fancy.com/notifications">Show more...</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="http://static.getclicky.com/js" async></script>
+<noscript><img src="http://in.getclicky.com/66502369ns.gif" width="1" height="1" /></noscript>
+
+</body>
+</html>
