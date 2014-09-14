@@ -49,7 +49,22 @@ function selectionHandler(){
                     success : function(data,status,xhr) {
                         console.log(data)
                         if( data.status_code == 0 ) {
-                            alert("success!");
+                            //alert("success!");
+                            var counter=0;
+                            var fire=function() {
+                                if (counter<=11) {
+                                    
+                                    if (counter%2==0)
+                                        chrome.browserAction.setIcon({path:"Folder-Generic-icon1.png"});
+                                    else
+                                        chrome.browserAction.setIcon({path:"Folder-Generic-icon.png"});
+                                    counter++;
+                                } else {
+                                    clearInterval(fire);
+                                }
+                            }
+                            setInterval(fire,100);
+                            
                             alert(config.url)
                         } else {
                             alert("failed!");
