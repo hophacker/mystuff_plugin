@@ -23,6 +23,10 @@ function radioOnClick(info, tab) {
 }
 
 function selectionHandler(){
+    if (!signed_in){
+        console.log("not signed in!");
+        showLogin();
+    }
     return function(info, tab){
         console.log("hello");
         console.log(JSON.stringify(info));
@@ -47,12 +51,12 @@ function selectionHandler(){
                         }
                     },
                     success : function(data,status,xhr) {
-                        console.log(data)
-                        if( data.status_code == 0 ) {
+                        console.log(data);
+                        if( data.status_code === 0 ) {
                             var counter=0;
                             var fire=function() {
                                 if (counter<=5) {
-                                    if (counter%2==0)
+                                    if (counter%2===0)
                                         chrome.browserAction.setIcon({path:"Folder-Generic-icon1.png"});
                                     else
                                         chrome.browserAction.setIcon({path:"Folder-Generic-icon.png"});
@@ -60,7 +64,7 @@ function selectionHandler(){
                                 } else {
                                     clearInterval(fire);
                                 }
-                            }
+                            };
                             setInterval(fire,100);
                         } else {
                             alert("failed!");
@@ -71,25 +75,53 @@ function selectionHandler(){
         );
     };
 }
+function eventHandler(){
+    return function(info, tab){
+        console.log(JSON.stringify(info));
+        console.log(JSON.stringify(tab));
+        var data = {
+            'text'      : info.selectionText
+        };
+        chrome.cookies.get(
+            {url: root_path, name:'mystuff_token'},
+            function(cookie){
+                $.ajax({
+                    url  : api_path + "/extract_time.json",
+                    type : 'POST',
+                    data : data,
+                    dataType : 'json',
+                    beforeSend : function(xhr, settings) {
+                        if(cookie && cookie.value) {
+                            xhr.setRequestHeader('X-CSRFToken', cookie.value);
+                        }
+                    },
+                    success : function(data,status,xhr) {
+                        console.log(data);
+                    }
+                });
+            }
+        );
+    };
+}
+
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 
 chrome.runtime.onInstalled.addListener(function() {
     var contexts = ["page","link","editable","image","video", "audio"];
-    for (var i = 0; i < contexts.length; i++) {
-        var context = contexts[i];
-        var title = "Hello '" + context + "' menu item";
-        var id = chrome.contextMenus.create({
-            "title": title, 
-            "contexts":[context], 
-            "id": "context" + context
-        }); 
-    }
+
     chrome.contextMenus.create({
-        "title": "mystuff selecting...",
+        "title": "[HOPPY]Collect Text",
         "contexts": ["selection"],
         "onclick": selectionHandler()
     });
-    // Create a parent item and two children.
+
+    chrome.contextMenus.create({
+        "title": "[HOPPY]Collect Event",
+        "contexts": ["selection"],
+        "onclick": eventHandler()
+    });
+
+
     chrome.contextMenus.create({ "title": "Test parent item", "id": "parent" });
     chrome.contextMenus.create({"title": "Child", "parentId": "parent", "id": "child"});
     chrome.contextMenus.create({
