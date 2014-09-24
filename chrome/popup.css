@@ -293,6 +293,9 @@ section#wrap_waiting > .main_desc > div {
 .fbutton.blue {
 	background-color:#3e73b7;
 }
+.fbutton.ubuntu{
+    background-color:#7c384f;
+}
 .fbutton.blue:hover {
 	background-color:#84c449;
 }
