@@ -81,11 +81,14 @@ footer:after {
 /* -- */
 div.logo {
 	margin:0 auto;
-	background-image : url(./img/title_logo.png);
-	width:119px;
-	height:29px;
-	top: 8px;
+	/*background-image : url(./img/title_logo.png);*/
+	/*width:119px;*/
+	height:100%;
 	position: relative;
+    text-align: center;
+}
+div.logo img{
+    height: 100%;
 }
 button.notice {
 	display:block;
