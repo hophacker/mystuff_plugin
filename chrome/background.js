@@ -8,15 +8,27 @@ if(!localStorage.fancyBadgeText) {
     installed = false;
 }
 
-function showLogin() {
-    chrome.tabs.create({
-        url: signin_path 
-    },
-    function(tab){
-        loginTabId = tab.id;
-        //chrome.tabs.connect(loginTabId, ).onDisconnect(function(){ loginTabId = 0; });
-    });
+
+function updateLoginState(){
+    $.ajax({
+        url: root_path + '/api/check_signin.json',
+        async: false
+    }).done(function(data){
+        console.log(data.response);
+        signed_in = data.response.signed_in;
+    }).fail(function(){
+        signed_in = false
+    })
 }
+
+function getLoginState(){
+    if (!signed_in){
+        updateLoginState();
+        return signed_in;
+    }else return true;
+}
+
+
 
 function checkLogin() {
     var interval = 60; // seconds

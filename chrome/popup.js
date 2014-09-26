@@ -142,11 +142,14 @@ var Adder = (function(){
                         },
                         success : function(data,status,xhr) {
                             console.log(data)
-                            if( data.status_code == 1 ) {
-                                $("#gosee").data('image_url', data.image_url);
+                            if (notLogin(data)){
+                                showLogin();
+                                return;
+                            }
+                            if( data.status_code == 0 ) {
+                                $("#gosee").data('image_url', data.response.image_url);
                                 $("#wrap_add,#fancyit").hide();
                                 $("#wrap_success").show();
-
                                 $('body').trigger('mouseup.scroll');
                             } else {
                                 var msg = data.message || 'An error occured while requesting the server.\nPlease try again later.';

@@ -7,6 +7,7 @@ function closeTab() {
 	});
 }
 
+
 function getOptionValue(name, def) {
 	var val = localStorage[name];
 	if(!val && def) val = localStorage[name] = def;

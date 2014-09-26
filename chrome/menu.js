@@ -23,18 +23,21 @@ function radioOnClick(info, tab) {
 }
 
 function selectionHandler(){
-    if (!signed_in){
-        console.log("not signed in!");
-        showLogin();
-    }
     return function(info, tab){
-        console.log("hello");
-        console.log(JSON.stringify(info));
-        console.log(JSON.stringify(tab));
+//        if (getLoginState()){
+//            console.log("signed in!");
+//        }else{
+//            console.log("not signed in!");
+//            showLogin();
+//            return;
+//        }
+//        console.log(JSON.stringify(info));
+//        console.log(JSON.stringify(tab));
         var data = {
             'text[selection_text]'      : info.selectionText,
             'text[page_url]'            : info.pageUrl,
-            'text[frame_url]'           : info.frameUrl
+            'text[frame_url]'           : info.frameUrl,
+            'client_type'               : 'plugin'
         };
 
         chrome.cookies.get(
@@ -53,6 +56,10 @@ function selectionHandler(){
                     success : function(data,status,xhr) {
                         console.log(data);
                         if( data.status_code === 0 ) {
+                            if (notLogin(data)){
+                                showLogin();
+                                return;
+                            }
                             var counter=0;
                             var fire=function() {
                                 if (counter<=5) {
@@ -77,8 +84,6 @@ function selectionHandler(){
 }
 function eventHandler(){
     return function(info, tab){
-        console.log(JSON.stringify(info));
-        console.log(JSON.stringify(tab));
         var data = {
             'text'      : info.selectionText
         };
@@ -96,7 +101,21 @@ function eventHandler(){
                         }
                     },
                     success : function(data,status,xhr) {
-                        console.log(data);
+                        var script_var = {
+                            'description'   : info.selectionText,
+                            'datetime'      : data.response.datetime
+                        }
+                        chrome.tabs.getSelected(null, function(tab){
+                            tab_url   = tab.url;
+                            tab_title = tab.title;
+                            chrome.tabs.executeScript(
+                                tab.id,
+                                {code: 'var data = ' + JSON.stringify(script_var)},
+                                function(){
+                                    chrome.tabs.executeScript(tab.id, {file:'js/addEvent.js'});
+                                }
+                            );
+                        });
                     }
                 });
             }
