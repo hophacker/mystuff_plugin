@@ -89,18 +89,31 @@ function eventHandler(){
     return function(info, tab){
 //        console.log(JSON.stringify(chrono.parse("An appointment on Sep 12-13")));
 
-        selected =  info.selectionText;
-        datetime = chrono.parse(selected)[0];
+        var selected =  info.selectionText,
+            datetimes = chrono.parse(selected),
+            begin_datetime = "",
+            end_datetime = "",
+            now = moment();
+
+        if(datetimes.length === 0){
+            begin_datetime = end_datetime = now;
+        }else {
+            datetime = datetimes[0];
+
+            if (typeof datetime.startDate != 'undefined') {
+                begin_datetime = moment(datetime.startDate);
+            }else begin_datetime = now;
+
+            if (typeof datetime.endDate != 'undefined') {
+                end_datetime = moment(datetime.endDate);
+            }else end_datetime = now;
+
+        }
 
 
-        var begin_datetime = "",
-            end_datetime = "";
-        if (typeof datetime.startDate != 'undefined'){
-            begin_datetime = toEventFormat(datetime.startDate.toISOString());
-        }
-        if (typeof datetime.endDate != 'undefined'){
-            end_datetime = toEventFormat(datetime.endDate.toISOString());
-        }
+
+        begin_datetime = begin_datetime.format("YYYY-MM-DD HH:mm");
+        end_datetime = end_datetime.format("YYYY-MM-DD HH:mm");
 
         var script_var = {
             'description'   : info.selectionText,

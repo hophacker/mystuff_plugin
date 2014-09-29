@@ -53,10 +53,6 @@ $(function(){
 
     $("body").append(modal);
     $('#hoppy_modal .modal-footer').css("text-align", "center");
-//    $('#hoppy_modal .close').on('click', function(e){
-//        e.preventDefault();
-//        $('.hoppy-modal').fadeOut();
-//    })
     var hoppy_modal = $('#hoppy_modal');
     var hoppy_modal_finished = $('#hoppy_modal_finished');
     hoppy_modal.on('click', function(){
