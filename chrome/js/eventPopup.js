@@ -2,8 +2,12 @@ $(function(){
     var form =
             '<form id="hoppy_event_form" class="col-md-10 col-md-offset-1" action="' + events_path + '" method="post"> \
                 <div class="hoppy_group"> \
-                    <label>Time:</label>\
-                    <input class="input" type="text" name="event[datetime]" id="hoppy_event_datetime" width="1000">\
+                    <label>Begin Time:</label>\
+                    <input class="input" type="text" name="event[begin_datetime]" id="hoppy_event_begin_datetime" width="1000">\
+                </div> \
+                <div class="hoppy_group"> \
+                    <label>End Time:</label>\
+                    <input class="input" type="text" name="event[end_datetime]" id="hoppy_event_end_datetime" width="1000">\
                 </div> \
                 <div class="hoppy_group">\
                     <label>Title:</label>\
@@ -11,7 +15,7 @@ $(function(){
                 </div> \
                 <div class="hoppy_group">\
                     <label>Description:</label> \
-                    <textarea class="input" name="event[description]" id="hoppy_event_description" style="width:250px;height:150px;"></textarea> \
+                    <textarea class="input" name="event[description]" id="hoppy_event_description"></textarea> \
                 </div> \
             </div><div class="row"></form>',
         modal =
@@ -19,9 +23,6 @@ $(function(){
                 <div class="modal-dialog"> \
                     <div class="modal-content"> \
                         <div class="modal-header"> \
-                            <button class="close" data-dismiss="modal" type="button"> \
-                                <span class="sr-only">Close</span> \
-                            </button> \
                             <h4 class="modal-title" id="myModalLabel">Add event to your calendar</h4> \
                         </div> \
                         <div class="modal-body">'
@@ -37,21 +38,20 @@ $(function(){
                 <div class="modal-dialog"> \
                     <div class="modal-content"> \
                         <div class="modal-header"> \
-                            <button class="close" data-dismiss="modal" type="button"> \
-                                <span class="sr-only">Close</span> \
-                            </button> \
                             <h4 class="modal-title" id="myModalLabel">Event saved successfully</h4> \
                         </div> \
                         <div class="modal-body"> finished </div> \
                     </div> \
                 </div>\
             </div>';
+
+//    <button class="close" data-dismiss="modal" type="button"> \
+//        <span class="sr-only">Close</span> \
+//    </button> \
 //        <span aria-hidden="true">×</span> \
 //    <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button> \
 
     $("body").append(modal);
-    $('.hoppy_group label').css({"width": "80px", "font-size": "12px"});
-    $('.hoppy_group .input').css("width", "320px");
     $('#hoppy_modal .modal-footer').css("text-align", "center");
 //    $('#hoppy_modal .close').on('click', function(e){
 //        e.preventDefault();
@@ -68,7 +68,10 @@ $(function(){
 //        d.className = d.className.replace("modal-open","modal-close");
 //        $('.modal-backdrop').remove();
     });
-    $('#hoppy_event_datetime').datetimepicker({
+    $('#hoppy_event_begin_datetime').datetimepicker({
+        format:'Y-m-d H:i'
+    });
+    $('#hoppy_event_end_datetime').datetimepicker({
         format:'Y-m-d H:i'
     });
     $('#hoppy_modal .btn-primary').on('click', function(e){
@@ -76,7 +79,9 @@ $(function(){
         $.post(events_path,{
                 "event[title]" : $("#hoppy_event_title").val(),
                 "event[description]" : $("#hoppy_event_description").val(),
-                "event[datetime]" : $("#hoppy_event_datetime").val()
+                "event[begin_datetime]" : $("#hoppy_event_begin_datetime").val(),
+                "event[end_datetime]" : $("#hoppy_event_end_datetime").val(),
+                "event[datetime]" : $("#hoppy_event_begin_datetime").val()
             }
             ,function(data){
                 if (data.status_code === 0){

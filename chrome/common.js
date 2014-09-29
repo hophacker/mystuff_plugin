@@ -14,7 +14,7 @@ function showLogin() {
 }
 
 function notLogin(data){
-    alert(JSON.stringify(data));
+    console.log(JSON.stringify(data));
     if (data.response && data.response.signed_in === false)
         return true;
     else return false;
