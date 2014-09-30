@@ -126,6 +126,7 @@ function eventHandler(){
                 tab.id,
                 {code: 'var data = ' + JSON.stringify(script_var)},
                 function(){
+                    chrome.tabs.executeScript(tab.id, {file:'js/jquery.easyModal.js'});
                     chrome.tabs.executeScript(tab.id, {file:'js/addEvent.js'});
                 }
             );

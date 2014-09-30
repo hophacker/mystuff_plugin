@@ -19,7 +19,7 @@
 
    "content_scripts": [{ 
        "css":["css/jquery.datetimepicker.css", "css/modal.css"],
-       "js": ["jquery.min.js", "config.js", "js/eventPopup.js", "js/jquery.datetimepicker.js", "js/bootstrap.min.js"],
+       "js": ["jquery.min.js", "config.js", "js/eventPopup.js", "js/jquery.datetimepicker.js", "js/jquery.easyModal.js"],
        "matches": [ "http://*/*", "https://*/*" , "file:///*"],
        "run_at": "document_end"
    },{

@@ -1,13 +1,14 @@
 $(function(){
+
     var form =
             '<form id="hoppy_event_form" class="col-md-10 col-md-offset-1" action="' + events_path + '" method="post"> \
                 <div class="hoppy_group"> \
                     <label>Begin Time:</label>\
-                    <input class="input" type="text" name="event[begin_datetime]" id="hoppy_event_begin_datetime" width="1000">\
+                    <input class="input hoppy_datetime" type="text" name="event[begin_datetime]" id="hoppy_event_begin_datetime" width="1000">\
                 </div> \
                 <div class="hoppy_group"> \
                     <label>End Time:</label>\
-                    <input class="input" type="text" name="event[end_datetime]" id="hoppy_event_end_datetime" width="1000">\
+                    <input class="input hoppy_datetime" type="text" name="event[end_datetime]" id="hoppy_event_end_datetime" width="1000">\
                 </div> \
                 <div class="hoppy_group">\
                     <label>Title:</label>\
@@ -17,59 +18,59 @@ $(function(){
                     <label>Description:</label> \
                     <textarea class="input" name="event[description]" id="hoppy_event_description"></textarea> \
                 </div> \
-            </div><div class="row"></form>',
-        modal =
-            '<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="hoppy_modal" item-id="-1" role="dialog" tabindex="-1"> \
-                <div class="modal-dialog"> \
-                    <div class="modal-content"> \
-                        <div class="modal-header"> \
-                            <h4 class="modal-title" id="myModalLabel">Add event to your calendar</h4> \
-                        </div> \
-                        <div class="modal-body">'
-                            + form +
-                        '</div> \
-                        <div class="modal-footer"> \
-                            <button class="btn btn-primary" type="button">Add Event</button> \
-                        </div> \
-                    </div> \
-                </div> \
-            </div> \
-            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="hoppy_modal_finished" item-id="-1" role="dialog" tabindex="-1"> \
-                <div class="modal-dialog"> \
-                    <div class="modal-content"> \
-                        <div class="modal-header"> \
-                            <h4 class="modal-title" id="myModalLabel">Event saved successfully</h4> \
-                        </div> \
-                        <div class="modal-body"> finished </div> \
-                    </div> \
+                <div class="btn clearfix">\
+                    <a class="close btn-primary" href="#">Add Event</a>\
+                    <a class="close cancel" href="#">Cancel</a>\
                 </div>\
+            </form>\
+            <div class="row"></div>';
+        modal =
+            '<div id="hoppy_modal">\
+                <div class="header">\
+                    <h3>Add event to your calendar</h3>\
+                </div>'
+                    + form +
+                '</div> \
+            </div>\
+            <div id="hoppy_modal_finished"> \
+                <div class="header"> \
+                    Event saved successfully \
+                </div> \
+                <div class="modal-body"> finished </div> \
             </div>';
 
-//    <button class="close" data-dismiss="modal" type="button"> \
-//        <span class="sr-only">Close</span> \
-//    </button> \
-//        <span aria-hidden="true">×</span> \
-//    <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button> \
-
     $("body").append(modal);
-    $('#hoppy_modal .modal-footer').css("text-align", "center");
     var hoppy_modal = $('#hoppy_modal');
     var hoppy_modal_finished = $('#hoppy_modal_finished');
-    hoppy_modal.on('click', function(){
-        $(this).modal({
-            backdrop: "static"
-        })
-    }).on('hidden.bs.modal', function(){
-//        var d = document.getElementsByTagName("body")[0];
-//        d.className = d.className.replace("modal-open","modal-close");
-//        $('.modal-backdrop').remove();
+
+    hoppy_modal.easyModal({
+        zIndex: function(){return 100},
+        top: 100,
+        overlay : 0.2
+    }).click(function(){
+        hoppy_modal.trigger("openModal");
+    })
+
+    hoppy_modal_finished.easyModal({
+        top: 100,
+        overlay : 0.2
     });
-    $('#hoppy_event_begin_datetime').datetimepicker({
-        format:'Y-m-d H:i'
+
+    $('.hoppy_datetime').datetimepicker({
+        format:'Y-m-d H:i',
+        onShow: function() {
+//            var zIndex = 1 + Math.max.apply(Math, $('*').map(function () {
+//                return $(this).css('z-index');
+//            }).filter(function () {
+//                return $.isNumeric(this);
+//            }).map(function () {
+//                return parseInt(this, 10);
+//            }));
+//            $('.xdsoft_datetimepicker').css({"z-index": 101 });
+        }
     });
-    $('#hoppy_event_end_datetime').datetimepicker({
-        format:'Y-m-d H:i'
-    });
+
+
     $('#hoppy_modal .btn-primary').on('click', function(e){
         e.preventDefault();
         $.post(events_path,{
@@ -81,11 +82,11 @@ $(function(){
             }
             ,function(data){
                 if (data.status_code === 0){
-                    hoppy_modal.modal('hide');
+                    hoppy_modal.trigger("closeModal")
                     hoppy_modal_finished.find('.modal-body').html(
                             '<a target="_blank" href="' + data.response.created_url + '">Go to check saved event</a>'
                     );
-                    hoppy_modal_finished.modal();
+                    hoppy_modal_finished.trigger("openModal");
                 }else{
                     alert(JSON.stringify(data))
                 }
