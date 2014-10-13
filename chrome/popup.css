@@ -42,6 +42,28 @@ div#wrapper > div {
 	float:left;
 	position:relative;
 }
+div#wrap_note {
+	display: none;
+	z-index: 10;
+	position: absolute;
+	margin : 0;
+	height:465px;
+	width:320px;
+	background-color: #F5F6CE;
+}
+#note-area{
+	padding:5px;
+	border:1px solid #beced4;
+	height:400px;
+	width:278px;
+	margin-left: 15px;
+	margin-top:15px;
+	z-index: 13;
+}
+#note-save {
+	margin-right: 10px;
+}
+
 div#selected {
 	position: relative;
 	background-image : url(./img/image_back.png);

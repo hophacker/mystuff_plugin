@@ -187,6 +187,27 @@ function doFancy( simgs )
 	});
 }
 
+function doNote() {
+	$note_wrap=$('#wrap_note');
+	$('#note_btn').click(function(){
+		$note_wrap.toggle();
+	});
+	$('#note-area').click(function(){
+		$(this).focus();
+	})
+
+	$('#note-save').click(function(){
+		var note=$('#note-area').val();
+		 var data = {
+            'text[selection_text]'      : note,
+            'text[page_url]'            : 'na',
+            'text[frame_url]'           : 'na'
+        };
+		uploadText(data);
+		window.close();
+	})
+}
+
 function setNotiCount() {
 	var count = parseInt(localStorage['fancyBadgeText']) || 0;
 
@@ -208,6 +229,7 @@ if(isChrome) {
 	chrome.extension.onRequest.addListener(function(request, sender){
 		if(request.type != 'fancy.images') return;
 		doFancy(request.images);
+		doNote();
 	});
 }
 

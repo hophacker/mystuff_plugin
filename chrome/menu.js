@@ -33,7 +33,13 @@ function selectionHandler(){
             'text[frame_url]'           : info.frameUrl
         };
 
-        chrome.cookies.get(
+        uploadText(data);
+    };
+}
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+
+uploadText=function (data) {
+    chrome.cookies.get(
             {url: root_path, name:'mystuff_token'},
             function(cookie){
                 $.ajax({
@@ -69,12 +75,58 @@ function selectionHandler(){
                 });
             }
         );
+}
+
+function urlHandler() {
+    return function(info, tab){
+        var data = {
+            'text[link]'      : info.linkUrl,
+            'text[page_url]'            : info.pageUrl,
+            'text[frame_url]'           : info.frameUrl
+        };
+/*
+        chrome.cookies.get(
+            {url: root_path, name:'mystuff_token'},
+            function(cookie){
+                $.ajax({
+                    url  : texts_path,
+                    type : 'POST',
+                    data : data,
+                    dataType : 'json',
+                    beforeSend : function(xhr, settings) {
+                        if(cookie && cookie.value) {
+                            xhr.setRequestHeader('X-CSRFToken', cookie.value);
+                        }
+                    },
+                    success : function(data,status,xhr) {
+                        console.log(data)
+                        if( data.status_code == 0 ) {
+                            var counter=0;
+                            var fire=function() {
+                                if (counter<=5) {
+                                    if (counter%2==0)
+                                        chrome.browserAction.setIcon({path:"Folder-Generic-icon1.png"});
+                                    else
+                                        chrome.browserAction.setIcon({path:"Folder-Generic-icon.png"});
+                                    counter++;
+                                } else {
+                                    clearInterval(fire);
+                                }
+                            }
+                            setInterval(fire,100);
+                        } else {
+                            alert("failed!");
+                        }
+                    }
+                });
+            }
+        );*/
     };
 }
-chrome.contextMenus.onClicked.addListener(onClickHandler);
 
 chrome.runtime.onInstalled.addListener(function() {
     var contexts = ["page","link","editable","image","video", "audio"];
+    /*
     for (var i = 0; i < contexts.length; i++) {
         var context = contexts[i];
         var title = "Hello '" + context + "' menu item";
@@ -83,12 +135,21 @@ chrome.runtime.onInstalled.addListener(function() {
             "contexts":[context], 
             "id": "context" + context
         }); 
-    }
+    }*/
     chrome.contextMenus.create({
         "title": "mystuff selecting...",
         "contexts": ["selection"],
         "onclick": selectionHandler()
     });
+
+     chrome.contextMenus.create({
+        "title": "URL selecting...",
+        "contexts": ["link"],
+        "onclick": urlHandler()
+    });
+
+
+    /*
     // Create a parent item and two children.
     chrome.contextMenus.create({ "title": "Test parent item", "id": "parent" });
     chrome.contextMenus.create({"title": "Child", "parentId": "parent", "id": "child"});
@@ -108,5 +169,5 @@ chrome.runtime.onInstalled.addListener(function() {
         if (chrome.extension.lastError) {
             console.log("Got expected error: " + chrome.extension.lastError.message);
         }
-    });
+    });*/
 });
