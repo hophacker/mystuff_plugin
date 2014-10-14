@@ -5,6 +5,7 @@
         <link type="text/css" rel="stylesheet" href="./popup.css" />
         <script src="jquery.min.js"></script>
         <script src="config.js"></script>
+        <script src="adder.js"></script>
         <script src="popup.js"></script>
         <script src="common.js"></script>
     </head>
@@ -23,7 +24,7 @@
                     <div id="wrap_note">
                         <textarea id='note-area'></textarea>
                     </br>
-                        <button id='note-save' class="fbutton save gray right">Save</button>
+                        <button id='note-save' class="jbutton save gray right">Save</button>
                     </div>
                     <div id="selected"><img id="selected_image" /></div>
 
@@ -43,59 +44,28 @@
                             <input id="image_title"  name="image[title]" type="text" placeholder="Title for this image" />
                             <input id="image_description" name="image[description]"type="text" placeholder="Description for this image"/>
                         </div>
-                        <!-- <div class="desc_down">
-                    <select id="category-for-thing" size="1">
-                        <option value="">Put in category...</option>
-                        <option value="Other">Other</option>
-                        <option value="Mens">Men's</option>
-                        <option value="Womens">Women's</option>
-                        <option value="Kids">Kids</option>
-                        <option value="Pets">Pets</option>
-                        <option value="Home">Home</option>
-                        <option value="Gadgets">Gadgets</option>
-                        <option value="Art">Art</option>
-                        <option value="Food">Food</option>
-                        <option value="Media">Media</option>
-                        <option value="Architecture">Architecture</option>
-                        <option value="travel-and-destinations">Travel &amp; Destinations</option>
-                        <option value="sports-and-outdoors">Sports &amp; Outdoors</option>
-                        <option value="Workspace">Workspace</option>
-                        <option value="cars-and-vehicles">Cars &amp; Vehicles</option>
-                    </select>
-                </div> -->
-                        <!-- <div class="desc_down">
-                    <select id="user-list" size="1">
-                        <option value="">Add to List...</option>
-                        <option value="">-</option>
-                        <option value="">Loading...</option>
-                    </select>
-                </div> -->
-
                     </div>
                 </section>
 
                 <section id="wrap_fail">
                     <div class="floating"><img src="./img/fail.png"/></div>
                     <div class="main_desc">
-                        <div><b>Couldn't find any good images for this page.</b></div>
-                        <div>The images might not be large enough, or they might be protected or inside a web plugin.</div>
-                        <div>Try again on a different page.</div>
+                        <div><b>No good images in this page.</b></div>
                     </div>
                 </section>
 
                 <section id="wrap_disable">
                     <div class="floating"><img src="./img/fail.png"/></div>
                     <div class="main_desc">
-                        <div><b>Couldn't execute Fancy for this page.</b></div>
-                        <div>Try again on a different page.</div>
+                        <div><b>Jienote does not work for this page.</b></div>
                     </div>
                 </section>
 
                 <section id="wrap_success">
                     <div class="floating"><img src="./img/success.png"/></div>
                     <div class="main_desc">
-                        <div><b>Image has been saved to your collection!</b></div>
-                        <button id="gosee" type="button" class="fbutton gosee ubuntu big">Go See it</button>
+                        <div><b>Image has been saved to your Jienote account!</b></div>
+                        <button id="gosee" type="button" class="jbutton gosee ubuntu big">Check it</button>
                     </div>
                 </section>
 
@@ -105,9 +75,9 @@
                     </div>
                 </section>
                 <footer>
-                    <button id="close" type="button" class="fbutton close gray left">Close</button>
-                    <button id='note_btn' type="button" class="fbutton blue middle">Note</button>
-                    <button id="fancyit" type="button" class="fbutton fancy ubuntu right">Save it</button>
+                    <button id="close" type="button" class="jbutton close gray left">Close</button>
+                    <button id='note_btn' type="button" class="jbutton blue middle">Note</button>
+                    <button id="fancyit" type="button" class="jbutton fancy ubuntu right">Save it</button>
                 </footer>
             </div>
             <div id="notiList" style="visibility:hidden">
@@ -121,9 +91,5 @@
                 </div>
             </div>
         </div>
-
-        <!--<script src="http://static.getclicky.com/js" async></script>-->
-        <noscript><img src="http://in.getclicky.com/66502369ns.gif" width="1" height="1" /></noscript>
-
     </body>
 </html>

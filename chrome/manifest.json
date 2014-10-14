@@ -1,9 +1,9 @@
 {
    "name": "hoppy",
-   "version": "0.2.4",
+   "version": "0.2.4.1",
    "manifest_version": 2,
    "background": {
-      "scripts": ["common.js", "jquery.min.js", "config.js", "ajax.js", "background.js", "js/chrono.min.js", "menu.js", "js/moment.js"]
+      "scripts": ["adder.js", "common.js", "jquery.min.js", "config.js", "ajax.js", "background.js", "js/chrono.min.js", "menu.js", "js/moment.js"]
    },
    "browser_action": {
       "default_icon": "mystuff_icon_19.png",
@@ -29,6 +29,5 @@
 
    "options_page": "options.html",
    "permissions": [ "tabs", "http://*/*", "https://*/*", "cookies", "notifications", "contextMenus" ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
-   "message": "added blink"
+   "update_url": "https://clients2.google.com/service/update2/crx"
 }
