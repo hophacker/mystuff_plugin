@@ -1,6 +1,6 @@
 {
    "name": "hoppy",
-   "version": "0.2.3",
+   "version": "0.2.4",
    "manifest_version": 2,
    "background": {
       "scripts": ["common.js", "jquery.min.js", "config.js", "ajax.js", "background.js", "js/chrono.min.js", "menu.js", "js/moment.js"]
