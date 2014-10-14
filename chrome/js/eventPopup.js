@@ -1,12 +1,12 @@
 $(function(){
 
     var form =
-            '<form id="hoppy_event_form" class="col-md-10 col-md-offset-1" action="' + events_path + '" method="post"> \
+            '<form id="hoppy_event_form" class="hoppy_event_from" action="' + events_path + '" method="post"> \
                 <div class="hoppy_group"> \
                     <label>Begin Time:</label>\
                     <input class="input hoppy_datetime" type="text" name="event[begin_datetime]" id="hoppy_event_begin_datetime" width="1000">\
                 </div> \
-                <div class="hoppy_group"> \
+                <div class="hoppy_group" > \
                     <label>End Time:</label>\
                     <input class="input hoppy_datetime" type="text" name="event[end_datetime]" id="hoppy_event_end_datetime" width="1000">\
                 </div> \
@@ -14,12 +14,12 @@ $(function(){
                     <label>Title:</label>\
                     <input class="input" type="text" name="event[title]" id="hoppy_event_title">\
                 </div> \
-                <div class="hoppy_group">\
+                <div class="hoppy_group higher">\
                     <label>Description:</label> \
                     <textarea class="input" name="event[description]" id="hoppy_event_description"></textarea> \
                 </div> \
                 <div class="btn clearfix">\
-                    <a class="close btn-primary" href="#">Add Event</a>\
+                    <a class="close hoppy-btn-primary" href="#">Add Event</a>\
                     <a class="close cancel" href="#">Cancel</a>\
                 </div>\
             </form>\
@@ -27,7 +27,7 @@ $(function(){
         modal =
             '<div id="hoppy_modal">\
                 <div class="header">\
-                    <h3>Add event to your calendar</h3>\
+                    Add event to your calendar\
                 </div>'
                     + form +
                 '</div> \
@@ -59,19 +59,11 @@ $(function(){
     $('.hoppy_datetime').datetimepicker({
         format:'Y-m-d H:i',
         onShow: function() {
-//            var zIndex = 1 + Math.max.apply(Math, $('*').map(function () {
-//                return $(this).css('z-index');
-//            }).filter(function () {
-//                return $.isNumeric(this);
-//            }).map(function () {
-//                return parseInt(this, 10);
-//            }));
-//            $('.xdsoft_datetimepicker').css({"z-index": 101 });
         }
     });
 
 
-    $('#hoppy_modal .btn-primary').on('click', function(e){
+    $('#hoppy_modal .hoppy-btn-primary').on('click', function(e){
         e.preventDefault();
         $.post(events_path,{
                 "event[title]" : $("#hoppy_event_title").val(),

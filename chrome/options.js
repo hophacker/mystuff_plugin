@@ -53,6 +53,6 @@ $.ajax('http://fancy.com/notifications_count.json', { } )
 
 		if(xhr.status == 404) {
 			// needs login?
-			window.location.href = signin_path; //'https://fancy.com/fancyit/login?next='+optionsPageUrl;
+			window.location.href = signin_path; 
 		}
 	});

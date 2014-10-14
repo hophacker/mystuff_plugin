@@ -40,7 +40,13 @@ function selectionHandler(){
             'client_type'               : 'plugin'
         };
 
-        chrome.cookies.get(
+        uploadText(data);
+    };
+}
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+
+uploadText=function (data) {
+    chrome.cookies.get(
             {url: root_path, name:'mystuff_token'},
             function(cookie){
                 $.ajax({
@@ -80,6 +86,52 @@ function selectionHandler(){
                 });
             }
         );
+}
+
+function urlHandler() {
+    return function(info, tab){
+        var data = {
+            'text[link]'      : info.linkUrl,
+            'text[page_url]'            : info.pageUrl,
+            'text[frame_url]'           : info.frameUrl
+        };
+/*
+        chrome.cookies.get(
+            {url: root_path, name:'mystuff_token'},
+            function(cookie){
+                $.ajax({
+                    url  : texts_path,
+                    type : 'POST',
+                    data : data,
+                    dataType : 'json',
+                    beforeSend : function(xhr, settings) {
+                        if(cookie && cookie.value) {
+                            xhr.setRequestHeader('X-CSRFToken', cookie.value);
+                        }
+                    },
+                    success : function(data,status,xhr) {
+                        console.log(data)
+                        if( data.status_code == 0 ) {
+                            var counter=0;
+                            var fire=function() {
+                                if (counter<=5) {
+                                    if (counter%2==0)
+                                        chrome.browserAction.setIcon({path:"Folder-Generic-icon1.png"});
+                                    else
+                                        chrome.browserAction.setIcon({path:"Folder-Generic-icon.png"});
+                                    counter++;
+                                } else {
+                                    clearInterval(fire);
+                                }
+                            }
+                            setInterval(fire,100);
+                        } else {
+                            alert("failed!");
+                        }
+                    }
+                });
+            }
+        );*/
     };
 }
 function toEventFormat(datetime){
@@ -173,9 +225,9 @@ function eventHandler(){
 
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 
+
 chrome.runtime.onInstalled.addListener(function() {
     var contexts = ["page","link","editable","image","video", "audio"];
-
     chrome.contextMenus.create({
         "title": "[HOPPY]Collect Text",
         "contexts": ["selection"],
@@ -189,23 +241,11 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 
 
-    chrome.contextMenus.create({ "title": "Test parent item", "id": "parent" });
-    chrome.contextMenus.create({"title": "Child", "parentId": "parent", "id": "child"});
     chrome.contextMenus.create({
-        "title": "Radio 1",
-        "type": "radio",
-        "id": "radio1"
+        "title": "URL selecting...",
+        "contexts": ["link"],
+        "onclick": urlHandler()
     });
-
-    // Create some checkbox items.
-    chrome.contextMenus.create({"title": "Checkbox", "type": "checkbox", "id": "checkbox"});
-    // Intentionally create an invalid item, to show off error checking in the
-    // create callback.
-    console.log("About to try creating an invalid item - an error about " +
-                "duplicate item child1 should show up");
-    chrome.contextMenus.create({"title": "Oops", "id": "child1"}, function() {
-        if (chrome.extension.lastError) {
-            console.log("Got expected error: " + chrome.extension.lastError.message);
-        }
-    });
+    chrome.contextMenus.create({ "title": "Test parent item", "id": "parent" });
+    //chrome.contextMenus.create({"title": "Child", "parentId": "parent", "id": "child"});
 });
