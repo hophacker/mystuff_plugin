@@ -1,20 +1,22 @@
 {
    "name": "hoppy",
-   "version": "0.2.4.1",
+   "version": "0.2.4.2",
    "manifest_version": 2,
    "background": {
       "scripts": ["adder.js", "common.js", "jquery.min.js", "config.js", "ajax.js", "background.js", "js/chrono.min.js", "menu.js", "js/moment.js"]
    },
    "browser_action": {
-      "default_icon": "mystuff_icon_19.png",
+      "default_icon": "logo_19x19.png",
       "default_popup": "popup.html",
       "default_title": "Hoppy"
    },
    "description": "hoppy is an app which helps collect, manage, share web elements liked by you",
    "icons": {
-      "128": "mystuff_icon_128.png",
-      "16": "mystuff_icon_16.png",
-      "48": "mystuff_icon_48.png"
+      "128": "logo_128x128.png",
+      "64": "logo_64x64.png",
+      "48": "logo_48x48.png",
+      "19": "logo_19x19.png",
+      "16": "logo_16x16.png"
    },
 
    "content_scripts": [{ 
